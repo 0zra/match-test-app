@@ -4,6 +4,8 @@ import { Layout } from './components/Layout'
 import { MockSidebar as Sidebar } from './components/DashboardSidebar'
 import { ReportsMenu } from './components/ReportsMenu'
 import { NoReportsComponent } from './components/NoReportsComponent'
+import { DataTable } from './components/DataTable'
+import { TableSummary } from './components/DataTable/TableSummary'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,7 +17,9 @@ function App() {
             <Sidebar />
             <div className='flex flex-col w-full'>
               <ReportsMenu />
-              {true && <NoReportsComponent></NoReportsComponent>}
+              {false && <NoReportsComponent></NoReportsComponent>}
+              {true && <DataTable />}
+              {true && <TableSummary totalAmount='14,065 USD'></TableSummary>}
             </div>
         </div>
       </Layout>
