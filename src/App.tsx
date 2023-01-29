@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import bLogo from './assets/b-logo.svg'
 import './App.css'
 import { Layout } from './components/Layout'
+import { MockSidebar as Sidebar } from './components/DashboardSidebar'
+import { ReportsMenu } from './components/ReportsMenu'
+import { NoReportsComponent } from './components/NoReportsComponent'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -10,7 +11,13 @@ function App() {
   return (
     <div className="App">
       <Layout>
-sadrzaj
+        <div className="flex">
+            <Sidebar />
+            <div className='flex flex-col w-full'>
+              <ReportsMenu />
+              {true && <NoReportsComponent></NoReportsComponent>}
+            </div>
+        </div>
       </Layout>
       
     </div>

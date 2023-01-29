@@ -7,16 +7,10 @@ import {Footer} from "../MockFooter"
 
 
 interface LayoutProps {
-	headerButtonColor?: string;
-	headerButtonText?: string;
-	heroColor?: string;
   children: React.ReactNode
 }
 
 export const Layout: React.FC<LayoutProps> = ({
-	headerButtonColor,
-	headerButtonText,
-	heroColor,
 	children
 }) => {
 	return (
