@@ -10,7 +10,7 @@ export const TableRow: React.FC<TableRowProps> = ({
 }) => {
 	return (
 		<div className={`w-full flex justify-between   mt-2 max-w-[1024px]  px-6  ${index%2 && 'bg-white' } ml-2 `}>
-			{data.map((field: string) => (<div>{field}</div>))}
+			{data.map((field: string, index) => (<div key={index+field}>{field}</div>))}
 		</div>
 	);
 };
