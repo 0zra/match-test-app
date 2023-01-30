@@ -50,7 +50,7 @@ function App() {
               {false && <NoReportsComponent></NoReportsComponent>}
               <div className="flex max-w-[1024px]">
                 {true && <DataTable />}
-                {true && <ReportData />}
+                {false && <ReportData />}
               </div>
               {true && <TableSummary totalAmount='14,065 USD'></TableSummary>}
             </div>

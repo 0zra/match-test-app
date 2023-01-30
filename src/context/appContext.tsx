@@ -79,7 +79,7 @@ export const AppContextProvider: React.FC<ProviderProps> = (props) => {
     reportData, 
     setReportData
   }
-console.log(reportData)
+  
   return (
 		<AppContext.Provider value={contextValue}>
 			{props.children}
