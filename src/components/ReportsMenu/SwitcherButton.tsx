@@ -1,15 +1,35 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import DownArrow from '../../assets/down-arrow.svg'
 import useOnclickOutside from 'react-cool-onclickoutside';
 import { useGetGatewaysDataQuery, useGetProjectsDataQuery } from '../../services';
+import { useAppContext } from '../../context/appContext';
 
 export const SwitcherButton: React.FC<{label: string, className?: string, buttonFor: 'projects' | 'gateway'}> = ({
-	label, className, buttonFor
+	className, buttonFor
 }) => {
+	const {
+    selectedProjectName, 
+    selectedGatewayName,
+    setSelectedGatewayName, 
+    setSelectedProjectName
+  } = useAppContext();
+  const [isDropdownOpened, setIsDropdownOpened] = useState<boolean>(false);
 
+  const handleOnClick = useCallback((name: string)=> {
+    if(buttonFor == 'projects'){
+      setSelectedProjectName(name);
+    }
+    if(buttonFor == 'gateway'){
+      setSelectedGatewayName(name);
+    }
+    setIsDropdownOpened(false)
+  }, [setSelectedGatewayName, setSelectedProjectName, buttonFor])
+
+  const label = buttonFor == 'projects' ? selectedProjectName || 'All projects': 
+  buttonFor=='gateway' ? selectedGatewayName || 'All gateways' : ''
   
 
-  const [isDropdownOpened, setIsDropdownOpened] = useState<boolean>(false);
+
 
   const dropdownRef = useOnclickOutside(() => {
 		setIsDropdownOpened(false);
@@ -58,10 +78,7 @@ export const SwitcherButton: React.FC<{label: string, className?: string, button
 					>
 						<button
 							className="flex items-center whitespace-nowrap"
-							onClick={() => {
-                console.log(name)
-                setIsDropdownOpened(false)
-              }}
+							onClick={() => handleOnClick(name)}
 							aria-label={name}
 						>
 						{name}

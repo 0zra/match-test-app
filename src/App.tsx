@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
 import { Layout } from './components/Layout'
 import { MockSidebar as Sidebar } from './components/DashboardSidebar'
@@ -39,21 +39,6 @@ function App() {
 			keepPreviousData: true
 		}
 	);
-
-  const { mutate: createReport, isLoading: isCPLoading } =
-  usePostReportRequestMutation(
-    responseData => {
-      console.log(responseData)
-    },
-    error => {
-     console.log(error);
-     return false;
-    }
-  );
-
-  useEffect(()=> {
-    createReport({})
-  }, [])
 
   return (
     <div className="App">
