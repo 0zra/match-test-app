@@ -1,5 +1,6 @@
 import DownArrow from '../../assets/down-arrow.svg'
 import CalendarIcon from '../../assets/calendar-icon.svg'
+import { SwitcherButton } from './SwitcherButton'
 
 
 export const ReportsMenu: React.FC<{}> = ({
@@ -14,8 +15,8 @@ export const ReportsMenu: React.FC<{}> = ({
     </div>
 
     <div className='flex justify-around'>
-    <button className="bg-teal-400 pt-1 text-white h-8 rounded-md px-4 mt-2 flex justify-between min-w-[135px]"><div>All projects</div>  <div><img src={DownArrow} className="mt-2" alt="Down arrow" /></div></button>
-    <button className="bg-teal-400 pt-1 text-white h-8 rounded-md px-4 mt-2 flex justify-between min-w-[135px] ml-2"><div>Gateway</div>  <div><img src={DownArrow} className="mt-2" alt="Down arrow" /></div></button>
+    <SwitcherButton label={"All projects"} buttonFor="projects"/>
+    <SwitcherButton label={"Gateway"} className='ml-2' buttonFor='gateway'/>
     <button className="bg-teal-400 pt-1 text-white h-8 rounded-md px-4 mt-2 flex justify-between min-w-[135px] ml-2"><div>From date</div>  <div><img src={CalendarIcon} className="mt-2" alt="Calendar" /></div></button>
     <button className="bg-teal-400 pt-1 text-white h-8 rounded-md px-4 mt-2 flex justify-between min-w-[135px] ml-2"><div>To date</div>  <div><img src={CalendarIcon} className="mt-2" alt="Calendar" /></div></button>
     <button className="bg-blue-900 pt-1 text-white h-8 rounded-md px-4 mt-2 flex justify-between min-w-[135px] ml-2"><div>Generate report</div> </button>

@@ -1,5 +1,5 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
-import { useQuery, UseQueryOptions, QueryKey } from 'react-query';
+import axios from 'axios';
+import { useQuery, QueryKey } from 'react-query';
 import { domains } from '../config/domains';
 import { GetUsersResponseInterface } from './interfaces';
 
