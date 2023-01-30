@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 import { Layout } from './components/Layout'
 import { MockSidebar as Sidebar } from './components/DashboardSidebar'
@@ -8,8 +8,52 @@ import { DataTable } from './components/DataTable'
 import { TableSummary } from './components/DataTable/TableSummary'
 import { ReportData } from './components/ReportData'
 
+import { 
+  useGetUsersDataQuery,
+  useGetProjectsDataQuery, 
+  useGetGatewaysDataQuery,
+  usePostReportRequestMutation
+} from './services'
+
+
 function App() {
   const [count, setCount] = useState(0)
+
+  const { data: usersData } = useGetUsersDataQuery(
+		{
+			enabled: true,
+			keepPreviousData: true
+		}
+	);
+
+  const { data: projectsData } = useGetProjectsDataQuery(
+		{
+			enabled: true,
+			keepPreviousData: true
+		}
+	);
+
+  const { data: gatewaysData } = useGetGatewaysDataQuery(
+		{
+			enabled: true,
+			keepPreviousData: true
+		}
+	);
+
+  const { mutate: createReport, isLoading: isCPLoading } =
+  usePostReportRequestMutation(
+    responseData => {
+      console.log(responseData)
+    },
+    error => {
+     console.log(error);
+     return false;
+    }
+  );
+
+  useEffect(()=> {
+    createReport({})
+  }, [])
 
   return (
     <div className="App">
