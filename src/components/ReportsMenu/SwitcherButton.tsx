@@ -11,7 +11,7 @@ export const SwitcherButton: React.FC<{label: string, className?: string, button
     selectedProjectName, 
     selectedGatewayName,
     setSelectedGatewayName, 
-    setSelectedProjectName
+    setSelectedProjectName,
   } = useAppContext();
   const [isDropdownOpened, setIsDropdownOpened] = useState<boolean>(false);
 

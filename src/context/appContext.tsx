@@ -31,7 +31,9 @@ const AppContext = createContext({
   from: '',
   to: '',
   setFrom: (date: string) => {},
-  setTo: (date: string) => {}
+  setTo: (date: string) => {},
+  isReportShown: false,
+  setIsReportShown: (val: boolean) => {}
 });
 
 export const AppContextProvider: React.FC<ProviderProps> = (props) => {
@@ -40,6 +42,7 @@ export const AppContextProvider: React.FC<ProviderProps> = (props) => {
   const [from, setFrom] = useState('');
   const [to, setTo] = useState('');
   const [reportData, setReportData] = useState<ReportItem[]>([]);
+  const [isReportShown, setIsReportShown] = useState(false)
 
   const { mutate: createReport, isLoading: isCPLoading } =
   usePostReportRequestMutation(
@@ -72,6 +75,7 @@ export const AppContextProvider: React.FC<ProviderProps> = (props) => {
     projectsData?.data.find(project => project.name === selectedProjectName)?.projectId
     const gatewayId = selectedGatewayName === 'All gateways' && '' ||
     gatewaysData?.data.find(gateway => gateway.name === selectedGatewayName)?.gatewayId
+    setIsReportShown(false)
 
     createReport({projectId, gatewayId, to, from}, )
   }, [selectedProjectName, selectedGatewayName, to, from])
@@ -85,7 +89,8 @@ export const AppContextProvider: React.FC<ProviderProps> = (props) => {
     reportData, 
     setReportData,
     to, setTo,
-    from, setFrom
+    from, setFrom,
+    isReportShown, setIsReportShown
   }
   
   return (

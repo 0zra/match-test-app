@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import './App.css'
 import { Layout } from './components/Layout'
 import { MockSidebar as Sidebar } from './components/DashboardSidebar'
@@ -13,8 +13,11 @@ import { useAppContext } from './context/appContext'
 
 function App() {
   const {
-    reportData
+    reportData,
+    isReportShown
   } = useAppContext();
+
+  const totalAmount = useMemo(()=> reportData.reduce((acc, item) => acc+item.amount, 0), [reportData])
 
   return (
     <div className="App">
@@ -27,10 +30,10 @@ function App() {
               
               <div className="flex max-w-[1024px]">
                 {true && <DataTable />}
-                {false && <ReportData />}
+                {isReportShown && <ReportData />}
               </div>}
               
-              {false && <TableSummary totalAmount='14,065 USD'></TableSummary>}
+              {!isReportShown && <TableSummary totalAmount={totalAmount+' USD'}></TableSummary>}
             </div>
         </div>
       </Layout>
