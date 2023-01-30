@@ -1,5 +1,7 @@
 import React from 'react';
 import { useAppContext } from '../../context/appContext';
+import { AllProjectsAllGatewaysTable } from './AllProjectsAllGatewaysTable';
+import { AllProjectsOneGatewayTable } from './AllProjectsOneGatewayTable';
 import { OneProjectAllGatewaysTable } from './OneProjectAllGatewaysTable';
 import { OneProjectOneGatewayTable } from './OneProjectOneGatewayTable';
 import { SummaryRow } from './SummaryRow';
@@ -24,11 +26,12 @@ export const DataTable: React.FC<DataTableProps> = ({
 
 	return (
 		<div className='w-full flex flex-col bg-blue-50 ml-10 mt-4 max-w-[1024px] rounded-md p-6'>
-			<div className='font-bold'>{selectedProjectName} | {selectedGatewayName}</div>
+			<div className='font-bold'>{selectedProjectName || 'All projects'} | {selectedGatewayName || 'All gateways'}</div>
       {
       selectedProjectName !== 'All projects' && selectedGatewayName !== 'All gateways'? <OneProjectOneGatewayTable data={reportData}/>:
       selectedProjectName !== 'All projects' && selectedGatewayName === 'All gateways'? <OneProjectAllGatewaysTable data={reportData}/>:
-      <></>}
+      selectedProjectName === 'All projects' && selectedGatewayName !== 'All gateways'? <AllProjectsOneGatewayTable data={reportData}/>:
+      <AllProjectsAllGatewaysTable data={reportData}/>}
       {/* <SummaryRow title='Project 1' ammount='10,065 USD'/>
       <TableHeader fields={['Date', 'Gateway', 'Transaction ID', 'Amount']} />
       <TableRow data={['1/21/2021', 'Gateway 2', 'a732b', '3964 USD']} index={0}/>
