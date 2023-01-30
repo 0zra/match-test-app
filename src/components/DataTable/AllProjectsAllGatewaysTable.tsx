@@ -38,7 +38,6 @@ if(!gatewaysData) {
 }
 
  const gatewayNames = getGatewayNames(gatewaysData?.data)
-
  return <>
 {projectsData?.data.map(project => <div key={project.projectId}>
   <SummaryRow 
@@ -46,6 +45,7 @@ if(!gatewaysData) {
     ammount={data.filter(transaction => transaction.projectId === project.projectId).reduce((sum, transaction )=> sum + transaction.amount, 0 ) + " USD"}/>
     <TableHeader fields={['Date', 'Gateway', 'Transaction ID', 'Amount']} />
     {data.filter(transaction => transaction.projectId === project.projectId).map((dataItem, index) => <TableRow 
+      key={dataItem.paymentId}
     /* @ts-ignore */
       data={dataItem && [dataItem.created /*modified? */,gatewayNames[dataItem.gatewayId], dataItem.paymentId, , dataItem.amount+' USD']}
       index={index}

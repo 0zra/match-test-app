@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import DownArrow from '../../assets/down-arrow.svg'
 import useOnclickOutside from 'react-cool-onclickoutside';
 import { useGetGatewaysDataQuery, useGetProjectsDataQuery } from '../../services';
@@ -24,6 +24,16 @@ export const SwitcherButton: React.FC<{label: string, className?: string, button
     }
     setIsDropdownOpened(false)
   }, [setSelectedGatewayName, setSelectedProjectName, buttonFor])
+
+  useEffect(()=> {
+    if(buttonFor == 'projects' ){
+      setSelectedProjectName('All projects')
+    }
+    if(buttonFor == 'gateway' ){
+      setSelectedGatewayName('All gateways')
+    }
+  }, [buttonFor])
+
 
   const label = buttonFor == 'projects' ? selectedProjectName || 'All projects': 
   buttonFor=='gateway' ? selectedGatewayName || 'All gateways' : ''

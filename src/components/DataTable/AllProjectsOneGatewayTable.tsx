@@ -17,7 +17,6 @@ export const AllProjectsOneGatewayTable: React.FC<{data: ReportItem[]}> = ({
   if(!projectsData?.data) {
     return <></>
   }
-
   
 return <>
 {projectsData?.data.map(project => <div key={project.projectId}>
@@ -26,6 +25,7 @@ return <>
     ammount={data.filter(transaction => transaction.projectId === project.projectId).reduce((sum, transaction )=> sum + transaction.amount, 0 ) + " USD"}/>
     <TableHeader fields={['Date',  'Transaction ID', 'Amount']} />
     {data.filter(transaction => transaction.projectId === project.projectId).map((dataItem, index) => <TableRow 
+      key={dataItem.paymentId}
     /* @ts-ignore */
       data={dataItem && [dataItem.created /*modified? */, dataItem.paymentId, , dataItem.amount+' USD']}
       index={index}

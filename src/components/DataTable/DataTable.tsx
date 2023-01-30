@@ -22,7 +22,6 @@ export const DataTable: React.FC<DataTableProps> = ({
   } = useAppContext();
 
 
-  console.log("reportData", reportData)
 
 	return (
 		<div className='w-full flex flex-col bg-blue-50 ml-10 mt-4 max-w-[1024px] rounded-md p-6'>

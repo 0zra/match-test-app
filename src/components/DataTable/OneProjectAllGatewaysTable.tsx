@@ -26,6 +26,7 @@ return <>
     ammount={data.filter(transaction => transaction.gatewayId === gateway.gatewayId).reduce((sum, transaction )=> sum + transaction.amount, 0 ) + " USD"}/>
     <TableHeader fields={['Date',  'Transaction ID', 'Amount']} />
     {data.filter(transaction => transaction.gatewayId === gateway.gatewayId).map((dataItem, index) => <TableRow 
+      key={dataItem.paymentId}
     /* @ts-ignore */
       data={dataItem && [dataItem.created /*modified? */, dataItem.paymentId, , dataItem.amount+' USD']}
       index={index}

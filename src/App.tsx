@@ -8,37 +8,13 @@ import { DataTable } from './components/DataTable'
 import { TableSummary } from './components/DataTable/TableSummary'
 import { ReportData } from './components/ReportData'
 
-import { 
-  useGetUsersDataQuery,
-  useGetProjectsDataQuery, 
-  useGetGatewaysDataQuery,
-  usePostReportRequestMutation
-} from './services'
+import { useAppContext } from './context/appContext'
 
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  const { data: usersData } = useGetUsersDataQuery(
-		{
-			enabled: true,
-			keepPreviousData: true
-		}
-	);
-
-  const { data: projectsData } = useGetProjectsDataQuery(
-		{
-			enabled: true,
-			keepPreviousData: true
-		}
-	);
-
-  const { data: gatewaysData } = useGetGatewaysDataQuery(
-		{
-			enabled: true,
-			keepPreviousData: true
-		}
-	);
+  const {
+    reportData
+  } = useAppContext();
 
   return (
     <div className="App">
@@ -47,12 +23,14 @@ function App() {
             <Sidebar />
             <div className='flex flex-col w-full'>
               <ReportsMenu />
-              {false && <NoReportsComponent></NoReportsComponent>}
+              {reportData.length===0 ? <NoReportsComponent></NoReportsComponent>: 
+              
               <div className="flex max-w-[1024px]">
                 {true && <DataTable />}
                 {false && <ReportData />}
-              </div>
-              {true && <TableSummary totalAmount='14,065 USD'></TableSummary>}
+              </div>}
+              
+              {false && <TableSummary totalAmount='14,065 USD'></TableSummary>}
             </div>
         </div>
       </Layout>
