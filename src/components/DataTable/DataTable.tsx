@@ -1,5 +1,6 @@
 import React from 'react';
 import { useAppContext } from '../../context/appContext';
+import { OneProjectAllGatewaysTable } from './OneProjectAllGatewaysTable';
 import { OneProjectOneGatewayTable } from './OneProjectOneGatewayTable';
 import { SummaryRow } from './SummaryRow';
 import { TableHeader } from './TableHeader';
@@ -26,6 +27,7 @@ export const DataTable: React.FC<DataTableProps> = ({
 			<div className='font-bold'>{selectedProjectName} | {selectedGatewayName}</div>
       {
       selectedProjectName !== 'All projects' && selectedGatewayName !== 'All gateways'? <OneProjectOneGatewayTable data={reportData}/>:
+      selectedProjectName !== 'All projects' && selectedGatewayName === 'All gateways'? <OneProjectAllGatewaysTable data={reportData}/>:
       <></>}
       {/* <SummaryRow title='Project 1' ammount='10,065 USD'/>
       <TableHeader fields={['Date', 'Gateway', 'Transaction ID', 'Amount']} />
