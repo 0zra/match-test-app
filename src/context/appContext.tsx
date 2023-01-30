@@ -27,12 +27,18 @@ const AppContext = createContext({
   setSelectedProjectName: (projectName: string) => {},
   setSelectedGatewayName: (gatewayName: string) => {},
   reportData: [] as ReportItem[], 
-  setReportData: (reportData: ReportItem[]) => {}
+  setReportData: (reportData: ReportItem[]) => {},
+  from: '',
+  to: '',
+  setFrom: (date: string) => {},
+  setTo: (date: string) => {}
 });
 
 export const AppContextProvider: React.FC<ProviderProps> = (props) => {
   const [selectedProjectName, setSelectedProjectName] = useState('');
   const [selectedGatewayName, setSelectedGatewayName] = useState('');
+  const [from, setFrom] = useState('');
+  const [to, setTo] = useState('');
   const [reportData, setReportData] = useState<ReportItem[]>([]);
 
   const { mutate: createReport, isLoading: isCPLoading } =
@@ -67,8 +73,8 @@ export const AppContextProvider: React.FC<ProviderProps> = (props) => {
     const gatewayId = selectedGatewayName === 'All gateways' && '' ||
     gatewaysData?.data.find(gateway => gateway.name === selectedGatewayName)?.gatewayId
 
-    createReport({projectId, gatewayId}, )
-  }, [selectedProjectName, selectedGatewayName])
+    createReport({projectId, gatewayId, to, from}, )
+  }, [selectedProjectName, selectedGatewayName, to, from])
 
 
   const contextValue={
@@ -77,7 +83,9 @@ export const AppContextProvider: React.FC<ProviderProps> = (props) => {
     setSelectedProjectName,
     setSelectedGatewayName,
     reportData, 
-    setReportData
+    setReportData,
+    to, setTo,
+    from, setFrom
   }
   
   return (
